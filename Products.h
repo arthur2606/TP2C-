@@ -12,9 +12,7 @@ Class-Name=Products
 #include<iostream>
 #include<ostream>
 #include <vector>
-#include"Magasin.h"
-#include"Orders.h"
-#include"Client.h"
+
 
 
 

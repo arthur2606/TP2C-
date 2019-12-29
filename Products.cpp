@@ -8,11 +8,8 @@ Class-Name=Products
 #include <string>
 #include<iostream>
 #include<ostream>
-#include"Products.h"
-#include"Magasin.h"
-#include"Orders.h"
-#include"Client.h"
 #include <vector>
+#include"Products.h"
 
 
 

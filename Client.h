@@ -13,7 +13,7 @@ Class-Name=Client
 #include<ostream>
 #include<vector>
 #include"Products.h"
-#include"Magasin.h"
+
 #include"Orders.h"
 
 

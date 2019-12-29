@@ -23,7 +23,7 @@ class Magasin{
 
 	public:
 		Magasin();
-		void AddClient(Client* client);
+		void AddClient(Client& client);
 		void add_product_to_store(std::string title ,std::string description,int Qute,float prix);//ajouter un produits a la liste des produits
 		void display_products();//affcher tous les produits
 		void update_product_quantity(std::string description, int NQte);
