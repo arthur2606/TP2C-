@@ -26,11 +26,11 @@ class Client{
 		std::string getNom() const;
 		int getIdu() const;
 
-		void AddProducts(Products* P); //ajouter produits à mon panier
-		void DeleteProducts(Products* P); //Retirer un produits du panier
+		void AddProducts(Products P); //ajouter produits à mon panier
+		void DeleteProducts(Products P); //Retirer un produits du panier
 		void MonPanier(); //display panier
-		void ModifiedQte(Products* P1,int NQte);//modifier la quantité du produits 
-		void Commander(Products* P); //creer ou une enregistrer une commande 
+		void ModifiedQte(Products& P1,int NQte);//modifier la quantité du produits 
+		void Commander(Products P); //creer ou une enregistrer une commande 
 		void ValidCommand(); // valider la cpommande permettra de reinitialiser le panier du client
 		friend std::ostream &operator << (std::ostream &output,Client& Cl) 
 				{  
@@ -40,9 +40,9 @@ class Client{
 					if(Cl.m_panier.size() >0)
 					{
 						int i;
-						for(Products* P :Cl.m_panier)
+						for(Products P :Cl.m_panier)
 						{
-							output<<"Produits"<<i++<<":"<<P->getTitle() <<"  ' "<<P->getDescription() <<"    '( "<<P->getQte()<<" )"<<endl;
+							output<<"Produits"<<i++<<":"<<P.getTitle() <<"  ' "<<P.getDescription() <<"    '( "<<P.getQte()<<" )"<<std::endl;
 						}
 
 					}
@@ -59,7 +59,7 @@ class Client{
 		std::string m_prenom;
 		std::string m_nom;
 		int m_idU; // identifiant unique du client 
-		std::vector<Products*> m_panier; //
+		std::vector<Products> m_panier; //
 		
 
 		

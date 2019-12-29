@@ -31,9 +31,9 @@ using namespace std;
 
 		void Magasin::add_product_to_store(std::string title ,std::string description,int Qute,float prix)
 		{
-			Products* p(title ,description,Qute,prix) ;
+			Products p(title ,description,Qute,prix) ;
 
-			m_products.push_back(p);
+			m_products.push_back(&p);
 
 		}
 		void Magasin::display_products()//afficher la liste des produits
@@ -98,7 +98,8 @@ using namespace std;
 						{
 							if(P->getTitle()==titleP)
 							{
-								Cl->AddProducts(P);//le produits correspondant au titre entre par l'utilisateur
+								
+								Cl->AddProducts(&P);//le produits correspondant au titre entre par l'utilisateur
 							}
 						}
 					
@@ -116,7 +117,7 @@ using namespace std;
 						{
 							if(P->getTitle()==titleP)
 							{
-								Cl->AddProducts(P);//le produits correspondant au titre entre par l'utilisateur
+								Cl->AddProducts(&P);//le produits correspondant au titre entre par l'utilisateur
 							}
 						}
 				
