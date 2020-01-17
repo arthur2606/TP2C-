@@ -56,7 +56,7 @@ using namespace std;
 			
 		}
 
-		void Magasin::display_product_updated(std::string description)
+		void Magasin::display_product_updated(string description)
 		{
 
 			for(unsigned long i=0 ;i<m_products.size() ;i++)
