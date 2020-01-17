@@ -18,26 +18,30 @@ using namespace std;
 
 
 
-
-		Orders::Orders(Client client,Products products,std::string statut)
+		
+		Orders::Orders(Client client,std::vector<Products*> products,std::string statut)
 		{
+			
 			m_client=client;
-			m_products=products;
+			for(unsigned long i=0;i<products.size();i++)
+			{
+				m_products.at(i)=products.at(i);
+			}
 			m_statut=statut;
 			
 
 		}
-		std::string Orders::getStatut()
+		std::string Orders::getStatut() const
 		{
 			return m_statut;
 		}
 		
-		void Orders::UpdateStatut(Orders O,std::string NewStatut)
+		void Orders::UpdateStatut(std::string NewStatut)
 		{
-			O.m_statut=NewStatut;
+			m_statut=NewStatut;
 
 		}
-		friend std::ostream &operator << (std::ostream &output,Orders& O) 
+		std::ostream &operator << (std::ostream &output,Orders& O) 
 				{  
 					output <<O.m_client->getPrenom()<<"  "<<O.m_client->getNom()<<"    "<<O.m_products->getTitle()<<"  "<<O.m_statut <<"   "<<std::endl; 
 					return output; 

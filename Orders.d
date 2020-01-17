@@ -1,9 +1,7 @@
-Orders.o: Orders.cpp Magasin.h Orders.h Client.h Products.h
-
-Magasin.h:
-
-Orders.h:
+Orders.o: Orders.cpp Client.h Products.h Orders.h
 
 Client.h:
 
 Products.h:
+
+Orders.h:

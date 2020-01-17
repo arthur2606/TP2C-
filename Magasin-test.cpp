@@ -20,8 +20,7 @@ using namespace std;
 
  int main()
  {
-	Magasin Mag1();
-	cout<<"ok"<<endl;
+	std::cout<<"ok"<<std::endl;
 
   return 0;
 

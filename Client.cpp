@@ -16,8 +16,11 @@ Class-Name=Client
 
 using namespace std;
 
+Client::Client()
+{
 
-Client::Client(std::string prenom,std::string nom,int IdU)//constructeur de la classe client
+}
+Client::Client(string prenom,string nom,int IdU)//constructeur de la classe client
 	{
 		m_prenom=prenom;
 		m_nom=nom;
@@ -36,27 +39,44 @@ int Client::getIdu() const
 	{
 		return m_idU;
 	}
-
-void Client::AddProducts(Products P)//method permettant d'ajouter un produit
+void Client::setPrenom(std::string Prenom)
+{
+	m_prenom=Prenom;
+}
+void Client::setNom(std::string Nom)
+{
+	m_nom=Nom;
+}
+void Client::setIdu(int ID)
+{
+	m_idU=ID;
+}
+void Client::AddProducts(Products* P)//method permettant d'ajouter un produit
 
 	{
 		m_panier.push_back(P);
-
 	}
-void Client::DeleteProducts(Products P)//method permettant de supprimer un produits ajouter dans un panier
-	{
-		m_panier.erase(P);
 
-	}
-void Client::ModifiedQte(Products& P1,int NQte)//method qui modifie la quantité d'un article en mettant NQte comme  la nouvelle quantité qu'insere l'utilisateur 
-
+void Client::DeleteProducts(Products *P)//method permettant de supprimer un produits ajouter dans un panier
 	{
-		for(Products P: m_panier)
+		for(unsigned long i=0 ;i<m_panier.size();i++)
 		{
-			int i=0;
-			if(P1.getTitle() ==m_panier.at(i).getTitle())
+			if(P->getTitle()==m_panier.at(i)->getTitle())
+			{
+				m_panier.erase(m_panier.begin()+i);
+			}
+		}
+		
+
+	}
+void Client::ModifiedQte(Products *P1,int NQte)//method qui modifie la quantité d'un article en mettant NQte comme  la nouvelle quantité qu'insere l'utilisateur 
+
+	{
+		for(unsigned long i=0;i<m_panier.size();i++)
+		{
+			if(P1->getTitle() ==m_panier.at(i)->getTitle())
 				{
-					P1.setQte(NQte);
+					P1->setQte(NQte);
 				}
 		}
 		
@@ -64,52 +84,57 @@ void Client::ModifiedQte(Products& P1,int NQte)//method qui modifie la quantité
 
 void Client::MonPanier()//method permettant d'afficher la quantité d'articles contenu dans son panier
 	{
-		for(Products P: m_panier)
+		if(m_panier.size() >0)
 		{
-			int i=0;
-		 	if(m_panier.size() >0)
-					{
-						int i=0;
-						for(Products P :m_panier)
-						{
-							std::cout<<"Produits"<<i++<<":"<<P.getTitle() <<"  ' "<<P.getDescription() <<"    '( "<<P.getQte()<<" )"<<std::endl;
-						}
-
-					}
-		
-
+			for(unsigned long i=0 ;i<m_panier.size() ;i++)
+		{
+			std::cout<<"Produits"<<i<<":"<<m_panier.at(i)->getTitle() <<"  ' "<<m_panier.at(i)->getDescription() <<"    '( "<<m_panier.at(i)->getQte()<<" )"<<std::endl;
 		}
+		}
+		
 			
 	}
-void Client::Commander(Products P)//method qui va permettre au client de commander des articles qui sont dans son panier
+void Client::Commander(Products *P)//method qui va permettre au client de commander des articles qui sont dans son panier
 	{
 
 
 		for(unsigned long i=0 ;i<m_panier.size()-1;i++)
 			{
-				if(P.getTitle() !=m_panier.at(i).getTitle())
+				if(P->getTitle() !=m_panier.at(i)->getTitle())
 				{
 					cout<<"erreur ,votre article n'est pas dans votre panier"<<endl;
 				}
 				else
 				{
-
-					Orders O(getIdu(),P.getTitle(),"COMMANDE");
-					
+					m_orders.push_back(P);
 				}
 			}
+			Client C();
 		
-		
+		//Orders O(C,m_orders,"Commandé");
 	}
 void Client::ValidCommand()//method qui va reinitialiser le panier aprés avoir effectué la commande
 		{
-			
-		for(unsigned long i=0 ;i<m_panier.size()-1;i++)
-			{
-				DeleteProducts(m_panier.at(i));
-			}
+
+				m_panier.empty();
+	
 		
 		}
 
 
-		
+std::ostream &operator << (std::ostream &output,Client& Cl) 
+				{  
+
+					if(Cl.m_panier.size() >0)
+					{
+							output<<"nom :"<<Cl.m_nom<<"prenom : "<<Cl.m_prenom<<"ID : "<<Cl.m_idU<<std::endl;
+							return output;
+					}
+					else
+					{
+						output<<" erreur"<<std::endl;
+						return output;
+
+					}
+
+		    }

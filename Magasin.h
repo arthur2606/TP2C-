@@ -23,11 +23,11 @@ class Magasin{
 
 	public:
 		Magasin();
-		void AddClient(Client& client);
-		void add_product_to_store(std::string title ,std::string description,int Qute,float prix);//ajouter un produits a la liste des produits
+		void AddClient(Client* client);
+		void add_product_to_store(std::string title,std::string description,int Qute,float prix);//ajouter un produits a la liste des produits
 		void display_products();//affcher tous les produits
 		void update_product_quantity(std::string description, int NQte);
-		void display_productupdated(std::string description);//afficher un produits modifié
+		void display_product_updated(std::string description);//afficher un produits modifié
 		void display_client(int Num);//afficher un client selectionné par son nom ou par son IdU
 		void add_product_to_client(std::string titleP, std::string name, std::string surname);//ajouter un produit à un client via son nom
 		void add_product_to_client(std::string titleP, int Idu);//ajouter un produit à un client via son idU

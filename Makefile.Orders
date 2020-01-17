@@ -1,7 +1,7 @@
 CXX        = g++
 CXXFLAGS   = -Wall -Wextra -std=c++14
 LDFLAGS    = -lm
-SRCS       = Orders.cpp Client.cpp Products.cpp  Orders-test.cpp
+SRCS       = Orders.cpp Client.cpp Products.cpp Magasin.cpp  Orders-test.cpp
 OBJS       = $(SRCS:.cpp=.o)
 TARGET     = Orders-test
 DEPFLAGS   = -MMD -MP

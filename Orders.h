@@ -12,34 +12,28 @@ Class-Name=Products
 #include<iostream>
 #include<ostream>
 #include <vector>
-#include"Client.h"
+
 #include"Products.h"
 
+#include"Client.h"
 
 
 
 class Orders{
 
 	public:
-		
-		Orders(Client client,Products products,std::string statut);
-		void UpdateStatut(Orders O,std::string Statut); //modifier le statut d'une  commande 
-		std::string getStatut();
-		friend std::ostream &operator << (std::ostream &output,Orders& O) ;
-				
 
+		Orders(Client client,std::vector<Products*> products,std::string statut);
+		void UpdateStatut(std::string Statut); //modifier le statut d'une  commande 
+		std::string getStatut() const;
+		friend std::ostream &operator << (std::ostream &output,Orders& O);
 
-
-		
-
-
+						
 	private:
 		Client m_client;
-		Products m_products;
+		std::vector<Products*> m_products;
 		std::string m_statut;
+
 		
-
-
-
-} ;
-#endif
+		} ;
+		#endif

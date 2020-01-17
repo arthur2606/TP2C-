@@ -22,63 +22,59 @@ using namespace std;
 		{
 
 		}
-		void Magasin::AddClient(Client& client)
+		void Magasin::AddClient(Client* client)
 		{
 
 			m_clients.push_back(client);
 
 		}
-
-		void Magasin::add_product_to_store(std::string title ,std::string description,int Qute,float prix)
+		void Magasin::add_product_to_store(string title ,string description,int Qute,float prix)
 		{
-			Products* p(title ,description,Qute,prix);
+			Products p(title,description,Qute,prix);
 
-			m_products.push_back(p);
+			m_products.push_back(&p);
 
 		}
 		void Magasin::display_products()//afficher la liste des produits
 		{
-			std::vector<Products*> m_products;
-			for(Products* P: m_products)
+			for(unsigned long i=0 ;i<m_products.size() ;i++)
 				{
-					int i=0;
-					 std::cout<<"Produits"<<i++<<":"<<P->getTitle()<<endl;
+					 std::cout<<"Produits"<<i<<":"<<m_products.at(i)->getTitle()<<std::endl;
 					 cout<<"";
 				}
 		}
 		void Magasin::update_product_quantity(std::string description, int NQte)
 		{
 
-			for(Products* P: m_products)
+			for(unsigned long i=0 ;i<m_products.size() ;i++)
 			{
-				if(P->getDescription()==description)
+				if(m_products.at(i)->getDescription()==description)
 				{
-					P->setQte(NQte);
+					m_products.at(i)->setQte(NQte);
 				}
 			}
 			
 		}
 
-		void Magasin::display_productupdated(std::string description)
+		void Magasin::display_product_updated(std::string description)
 		{
 
-			for(Products* P: m_products)
+			for(unsigned long i=0 ;i<m_products.size() ;i++)
 			{
-				if(P->getDescription()==description)
+				if(m_products.at(i)->getDescription()==description)
 				{
-					int i=0;
-					std::cout<<"Produits"<<i++<<":"<<P->getTitle()<<"  "<<P->getDescription()<<" ("<<P->getQte()<<" )"<<P->getprice()<<endl;
+					std::cout<<"Produits"<<i<<":"<<m_products.at(i)->getTitle()<<"  "<<m_products.at(i)->getDescription()<<" ("<<m_products.at(i)->getQte()<<" )"<<m_products.at(i)->getprice()<<std::endl;
 				}
 			}
 			
 		}
 		void Magasin::display_client(int Num)
 		{
-			for(Client* Cl: m_clients)
+			for(unsigned long i=0 ;i<m_products.size() ;i++)
 			{
-				if(Cl->getIdu()==Num)
+				if(m_clients.at(i)->getIdu()==Num)
 				{
-					std::cout<<Cl->getPrenom()<<" "<<Cl->getNom()<<" "<<Cl->getIdu()<<endl;
+					std::cout<<m_clients.at(i)->getPrenom()<<" "<<m_clients.at(i)->getNom()<<" "<<m_clients.at(i)->getIdu()<<std::endl;
 
 					
 				}
@@ -90,18 +86,12 @@ using namespace std;
 		void Magasin::add_product_to_client(std::string titleP, std::string name, std::string surname)
 		{
 			
-			for (Client* Cl :m_clients)
+			for (unsigned long i =0 ;i<m_clients.size();i++)
 			{
-				if(Cl->getNom()==name && Cl->getPrenom()==surname)
+				if(m_clients.at(i)->getNom()==name && m_clients.at(i)->getPrenom()==surname && m_products.at(i)->getTitle()==titleP)
 				{
-					for(Products* P: m_products)
-						{
-							if(P->getTitle()==titleP)
-							{
 								
-								Cl->AddProducts(P);//le produits correspondant au titre entre par l'utilisateur
-							}
-						}
+								m_clients.at(i)->AddProducts(m_products.at(i));//le produits correspondant au titre entre par l'utilisateur
 					
 				}
 			}
@@ -109,17 +99,11 @@ using namespace std;
 		}
 		void Magasin::add_product_to_client (std::string titleP, int Idu)
 		{
-			for (Client* Cl : m_clients)
+			for (unsigned long i =0 ;i<m_clients.size();i++)
 			{
-				if(Cl->getIdu()==Idu)
+				if(m_clients.at(i)->getIdu()==Idu && m_products.at(i)->getTitle()==titleP)
 				{
-					for(Products* P: m_products)
-						{
-							if(P->getTitle()==titleP)
-							{
-								Cl->AddProducts(P);//le produits correspondant au titre entre par l'utilisateur
-							}
-						}
+								m_clients.at(i)->AddProducts(m_products.at(i));//le produits correspondant au titre entre par l'utilisateur
 				
 				}
 			}
@@ -133,17 +117,17 @@ using namespace std;
 		void Magasin::Display_all_Orders()
 		{
 			for(Orders* O: m_Orders)
-				std::cout<<O;
+				std::cout<<O<<std::endl;
 
 
 		}
 		void Magasin::Orders_of_clients(int Idu)
 		{
-			for (Client* Cl :m_clients)
+			for (unsigned long i =0 ;i<m_clients.size();i++)
 			{
-				if(Cl->getIdu()==Idu)
+				if(m_clients.at(i)->getIdu()==Idu)
 				{
-					Cl->MonPanier();
+					m_clients.at(i)->MonPanier();
 				}
 			}
 
